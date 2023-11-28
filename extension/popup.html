@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <title>Promptzilla</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="background.js"></script>
+    <!-- Add other head elements -->
+</head>
+<body>
+    <div id="app">
+        <div id="header">
+        <img id="logo" src="logo_light.png" alt="logo">
+        <label class="switch">
+            <input type="checkbox" id="theme-switch">
+            <span class="slider round"></span>
+        </label>
+        </div>
+        <input id="search-bar" type="text" placeholder="Enter a rough prompt " />
+        <button id="search-button">Enter</button>
+        <h2 id="prompt-section-title">Explore Prompts</h2> <!-- Added this line -->
+        <div id="prompt-list">
+            <!-- This will be filled dynamically -->
+        </div>
+        <div id="view-more-section">
+            <a id="view-more-link" href="all-results.html">
+                <span>View more</span>
+                <div id="view-more-arrow">&#x25B6;</div>
+            </a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="themeSwitcher.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

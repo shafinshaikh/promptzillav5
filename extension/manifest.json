@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Promptzilla",
+    "version": "5.0",
+    "description": "Enhance your AI model interactions with efficient prompting.",
+    "permissions": ["activeTab", "storage", "https://chat.openai.com/*"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/icon.png"
+        }
+    },
+    "icons": {
+        "16": "icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://chat.openai.com/*"],
+            "js": ["content.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}
