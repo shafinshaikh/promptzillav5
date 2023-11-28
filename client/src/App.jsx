@@ -21,6 +21,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/promptSuggestions" element={<PromptSuggestions />} />
                 <Route path="/sharedPrompts" element={<SharedPrompts />} />
+                <Route path="/userHistory" element={<UserHistory />} />
                 {/* Define more routes for other components */}
             </Routes>
         </Router>
