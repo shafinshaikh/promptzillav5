@@ -3,11 +3,11 @@
     "name": "Promptzilla",
     "version": "5.0",
     "description": "Enhance your AI model interactions with efficient prompting.",
-    "permissions": ["activeTab", "storage", "https://chat.openai.com/*"],
+    "permissions": ["activeTab", "storage"],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "images/icon.png"
+            "16": "icon.png"
         }
     },
     "icons": {
