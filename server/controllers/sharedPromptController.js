@@ -1,7 +1,3 @@
-const sharedPromptController = require('./controllers/sharedPromptController');
-
-app.get('/api/shared-prompts', sharedPromptController.getSharedPrompts);
-app.post('/api/shared-prompts', sharedPromptController.sharePrompt);
 // controllers/sharedPromptController.js
 const SharedPrompt = require('../models/SharedPrompt');
 // Implement getSharedPrompts, sharePrompt, etc.

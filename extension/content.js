@@ -49,8 +49,29 @@ function suggestPrompts() {
     }
 
     function displayPrompts(prompts) {
-        // Logic to display prompts on the page
-        // This will depend on how you want to show the prompts (e.g., insert a new element, use an overlay, etc.)
+        const promptContainer = document.createElement('div');
+        promptContainer.id = 'promptzilla-container';
+        promptContainer.style.cssText = 'position: absolute; top: 0; left: 0; z-index: 1000; background-color: #fff; border: 1px solid #8976fd; padding: 10px; border-radius: 8px; width: 300px;';
+    
+        prompts.forEach(prompt => {
+            const promptElement = document.createElement('div');
+            promptElement.style.cssText = 'margin-bottom: 10px;';
+    
+            const promptText = document.createElement('p');
+            promptText.textContent = prompt.text;
+            promptText.style.cssText = 'font-size: 14px; color: #333;';
+    
+            const preview = document.createElement('p'); // Adjust element type based on the type of preview
+            preview.textContent = prompt.preview; // Assuming 'preview' is text. Adjust if it's an image or other media type
+            preview.style.cssText = 'font-size: 12px; color: #666;';
+    
+            promptElement.appendChild(promptText);
+            promptElement.appendChild(preview);
+            promptContainer.appendChild(promptElement);
+        });
+    
+        // Append the container to the body or another appropriate element on the page
+        document.body.appendChild(promptContainer);
     }
 }
 

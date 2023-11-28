@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard';
 import PromptSuggestions from './components/promptsuggestions';
 import SharedPrompts from './components/sharedPrompts';
 import UserHistory from './components/userHistory';
+import Footer from './components/footer';
 // Import other components as needed
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/userHistory" element={<UserHistory />} />
                 {/* Define more routes for other components */}
             </Routes>
+            <Footer />
         </Router>
     );
 }

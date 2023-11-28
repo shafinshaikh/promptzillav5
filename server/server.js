@@ -1,19 +1,17 @@
 // server.js
-//CORS middleware
+require('dotenv').config();
 const cors = require('cors');
-app.use(cors());
-
-//Mongodb server setup
 const mongoose = require('mongoose');
-const mongoDBUri = import.meta.env.MONGODB_URI;
+const express = require('express');
+
+const mongoDBUri = process.env.MONGODB_URI;
 
 mongoose.connect(mongoDBUri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
-//Express server setup
-const express = require('express');
 const app = express();
+app.use(cors());
 app.use(express.json());
 // Define routes here
 app.listen(3000, () => console.log('Server running on port 3000'));
