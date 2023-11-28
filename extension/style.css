@@ -1,1 +1,154 @@
-/* Add your CSS styles here using the provided references and color scheme */
+/*Light purple color scheme [Dark Mode]*/
+
+body {
+    font-family: 'Ysabeau Office', sans-serif;
+    text-align: center;
+    background-color: #2a2a2f;
+    min-width: 355px; 
+    min-height:400px;
+    max-width: 100%;
+    position: relative;
+    vertical-align:middle;
+    border-radius: 20px;
+}
+
+#logo {
+    width: 60%;
+    margin: auto;
+    display: block;
+    padding-top: 10px;
+}
+
+#extension-logo{
+    color: #e7e4f2;
+}
+
+#search-bar {
+    font-family: 'Ysabeau Office', sans-serif;
+    width: 80%;
+    padding: 5px;
+    margin-top: 20px;
+    border: 1px solid #362081;
+    border-radius: 20px;
+    color: #e7e4f2;
+    background-color: #362081;
+}
+
+::placeholder { 
+    color: #e7e4f2;
+    opacity: 1; 
+}
+
+#search-button {
+    font-family: 'Ysabeau Office', sans-serif;
+    width: 50%;
+    padding: 5px;
+    margin-top: 10px;
+    background-color: #362180;
+    color: #e7e4f2;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#search-button:hover {
+    background-color: #8976fd;
+    color: #e7e4f2;
+}
+
+#search-button:active {
+    background-color: #362180;
+    color: #e7e4f2;
+}
+
+#prompt-section-title{
+    color: #e7e4f2;
+}
+#prompt-list {
+    margin-left: 20px;
+    text-align: left;
+    padding: 0;
+    list-style-type: none;
+    font-size: 15px;
+    color: #e7e4f2;
+    font-weight: bold;
+}
+
+#prompt-list li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #8976fd;
+    background-color: #2a2a2f;
+    color: #e7e4f2;
+    font-weight: bold;
+}
+
+#prompt-list li:last-child {
+    border-bottom: none;
+}
+
+.prompt-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-arrow, .copy-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #e7e4f2;
+}
+
+.dropdown-content {
+    display: none;
+    border: 1px solid #8976fd;
+    margin-top: 5px;
+    padding: 10px;
+    text-align: left;
+    background-color: #2a2a2f;
+    border-radius: 5px;
+    color: #e7e4f2;
+}
+
+.dropdown-content p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    color: #e7e4f2;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+#view-more-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#view-more-link {
+    text-decoration: none;
+    color: #e7e4f2;
+    font-family: 'Ysabeau Office', sans-serif;
+    font-weight: bold;
+}
+
+#view-more-arrow {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #362180;
+    color: #e7e4f2;
+    background-color: #362180;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+::placeholder{
+    text-align:center;
+}
