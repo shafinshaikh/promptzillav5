@@ -2,17 +2,40 @@
 console.log("Promptzilla content script running on ChatGPT");
 
 function displaySuggestions(suggestions, promptTextarea) {
-    // Create a container for suggestions if it doesn't exist
     let suggestionContainer = document.getElementById("promptzilla-suggestions");
     if (!suggestionContainer) {
         suggestionContainer = document.createElement("div");
         suggestionContainer.id = "promptzilla-suggestions";
-        suggestionContainer.style.cssText = "position: absolute; z-index: 1000; background-color: white; border: 1px solid #ddd; padding: 10px; border-radius: 8px; top: -60px; width: 100%;";
-        promptTextarea.parentNode.insertBefore(suggestionContainer, promptTextarea);
+        suggestionContainer.style.cssText = `
+            position: fixed; 
+            z-index: 9999; 
+            background-color: #8976fd; 
+            color: white;
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            border-radius: 8px; 
+            width: 300px; 
+            max-height: 150px; 
+            overflow-y: auto; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            top: 20px; 
+            right: 20px;
+        `;
+        document.body.appendChild(suggestionContainer); // Append to body for visibility
     }
 
-    // Populate the container with suggestions
-    suggestionContainer.innerHTML = suggestions.map(s => `<p style="cursor: pointer; margin: 5px 0;" onclick="document.getElementById('prompt-textarea').value = '${s}'">${s}</p>`).join('');
+    console.log("Displaying suggestions:", suggestions);
+    suggestionContainer.innerHTML = '';
+    suggestions.slice(0, 3).forEach(s => {
+        let suggestionElement = document.createElement("p");
+        suggestionElement.style.cssText = "cursor: pointer; margin: 5px 0;";
+        suggestionElement.textContent = s;
+        suggestionElement.addEventListener("click", () => {
+            promptTextarea.value = s;
+            suggestionContainer.style.display = 'none';
+        });
+        suggestionContainer.appendChild(suggestionElement);
+    });
 }
 
 function fetchSuggestions(userInput) {
