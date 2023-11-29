@@ -4,11 +4,31 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "fetchPrompts") {
+    if (request.action === "userTyped") {
         fetch(`http://localhost:3000/api/prompts?query=${request.query}`)
             .then(response => response.json())
-            .then(data => sendResponse({ prompts: data }))
+            .then(data => {
+                chrome.runtime.sendMessage({ action: "updatePrompts", prompts: data });
+                updateBadgeText('Open'); // Indicate new prompts are available
+            })
             .catch(error => console.error('Error fetching prompts:', error));
-        return true; // Indicates that sendResponse will be called asynchronously
+    }   
+});
+
+// Function to update badge text
+function updateBadgeText(text) {
+    chrome.action.setBadgeText({ text: text });
+    chrome.action.setBadgeBackgroundColor({ color: '#000000' });
+}
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "userTyped") {
+        fetch(`http://localhost:3000/api/prompts?query=${request.query}`)
+            .then(response => response.json())
+            .then(data => {
+                chrome.runtime.sendMessage({ action: "updatePrompts", prompts: data });
+                updateBadgeText('Open'); // Indicate new prompts are available
+            })
+            .catch(error => console.error('Error fetching prompts:', error));
     }
 });
