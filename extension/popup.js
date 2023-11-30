@@ -1,6 +1,5 @@
 // popup.js
 
-console.log('popup has started running ');
 document.addEventListener('DOMContentLoaded', () => {
     const promptList = document.getElementById('prompt-list');
 
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Request the stored prompts from the background script
     chrome.runtime.sendMessage({ action: "getPrompts" }, response => {
-        console.log('Prompts received:', response.prompts);
         if (response && response.prompts) {
             updatePromptList(response.prompts.slice(0, 3)); // Show top 3 prompts
         }
@@ -19,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         promptList.innerHTML = '';
         prompts.forEach(prompt => {
             const li = document.createElement('li');
+            li.className = 'prompt-item';
             li.innerHTML = `
                 <div class="prompt-container">
                     <p class="prompt-preview">${prompt.prompt.slice(0, 100)}...</p>
@@ -33,12 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
             promptList.appendChild(li);
 
-            li.querySelector('.dropdown-arrow').addEventListener('click', function() {
-                const dropdownContent = this.parentNode.parentNode.querySelector('.dropdown-content');
-                dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
+            li.querySelector('.dropdown-arrow').addEventListener('click', () => {
+                const dropdownContent = li.querySelector('.dropdown-content');
+                if (dropdownContent) {
+                    dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
+                }
             });
 
-            li.querySelector('.copy-icon').addEventListener('click', function() {
+            li.querySelector('.copy-icon').addEventListener('click', () => {
                 navigator.clipboard.writeText(prompt.prompt).then(() => {
                     alert('Prompt copied to clipboard!');
                 });
