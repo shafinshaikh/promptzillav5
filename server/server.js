@@ -6,6 +6,7 @@ const express = require('express');
 
 const mongoDBUri = process.env.MONGODB_URI;
 
+//MongoDB connection 
 mongoose.connect(mongoDBUri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));

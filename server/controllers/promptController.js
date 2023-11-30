@@ -3,7 +3,20 @@ const PromptSuggestion = require('../models/PromptSuggestion');
 
 exports.getPrompts = async (req, res) => {
     try {
-        const prompts = await PromptSuggestion.find();
+        const query = req.query.query; // Get the user's search query
+        let filter = {};
+
+        if (query) {
+            // Search for prompts that contain the query in either the 'prompt' field or 'keywords' array
+            filter = {
+                $or: [
+                    { prompt: { $regex: query, $options: 'i' } }, // case-insensitive search in 'prompt'
+                    { keywords: { $regex: query, $options: 'i' } } // case-insensitive search in 'keywords'
+                ]
+            };
+        }
+
+        const prompts = await PromptSuggestion.find(filter);
         res.status(200).json(prompts);
     } catch (error) {
         res.status(500).json({ message: error.message });

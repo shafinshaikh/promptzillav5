@@ -1,17 +1,18 @@
 // popup.js
+
+console.log('popup has started running ');
 document.addEventListener('DOMContentLoaded', () => {
     const promptList = document.getElementById('prompt-list');
 
     // Clear the badge when the popup is opened
     chrome.action.setBadgeText({ text: '' });
 
-    // Fetch last typed query from storage and then fetch prompts based on it
-    chrome.storage.local.get(['lastQuery'], function(result) {
-        const lastQuery = result.lastQuery || '';
-        fetch(`http://localhost:3000/api/prompts?query=${lastQuery}`)
-            .then(response => response.json())
-            .then(prompts => updatePromptList(prompts.slice(0, 3))) // Show top 3 prompts
-            .catch(error => console.error('Error fetching prompts:', error));
+    // Request the stored prompts from the background script
+    chrome.runtime.sendMessage({ action: "getPrompts" }, response => {
+        console.log('Prompts received:', response.prompts);
+        if (response && response.prompts) {
+            updatePromptList(response.prompts.slice(0, 3)); // Show top 3 prompts
+        }
     });
 
     function updatePromptList(prompts) {
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             li.innerHTML = `
                 <div class="prompt-container">
-                    <p class="prompt-preview">${prompt.prompt.slice(0, 50)}...</p>
+                    <p class="prompt-preview">${prompt.prompt.slice(0, 100)}...</p>
                     <div class="icon-container">
                         <span class="dropdown-arrow" title="See full prompt and preview result">&#x25BC;</span>
                         <span class="copy-icon" title="Copy prompt">&#x1F4CB;</span>
@@ -32,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
             promptList.appendChild(li);
 
-            // Add event listeners for dropdown and copy functionality
             li.querySelector('.dropdown-arrow').addEventListener('click', function() {
-                this.parentNode.parentNode.querySelector('.dropdown-content').classList.toggle('show');
+                const dropdownContent = this.parentNode.parentNode.querySelector('.dropdown-content');
+                dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
             });
 
             li.querySelector('.copy-icon').addEventListener('click', function() {
